@@ -1,0 +1,25 @@
+services:
+  lab:
+    build: .
+    image: ai-scientist-lab:1.0.0
+    container_name: ai-scientist-lab
+    ports:
+      - "127.0.0.1:8501:8501"   # localhost only
+    environment:
+      SCIENTIST_LAB_DATA: /data
+      # Optional local model (Milestone 3). Leave unset to stay fully offline.
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2}
+    volumes:
+      - lab-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /home/lab:uid=10001,gid=10001,mode=0700
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    restart: unless-stopped
+
+volumes:
+  lab-data:

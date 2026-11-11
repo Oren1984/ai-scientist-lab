@@ -1,0 +1,13 @@
+.git
+data
+docs
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.venv
+venv
+.env
+.env.*
+.streamlit/secrets.toml
+*.egg-info
+AI-Scientist-Lab-Work-Plan.md
